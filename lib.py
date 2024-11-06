@@ -32,6 +32,21 @@ def download_youtube_video(url, output_filename=None):
     output_file = output_filename + '.mp4' if output_filename else result[0]['title'] + '.mp4'
     return output_file
 
+def get_video_title(url):
+    ydl_opts = {
+        'quiet': True,
+        'skip_download': True,
+        'force_generic_extractor': True,
+    }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(url, download=False)
+            video_title = info_dict.get('title', None)
+            return video_title
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 
 def crop_video_to_aspect_ratio(input_video, output_video):
     video = VideoFileClip(input_video)

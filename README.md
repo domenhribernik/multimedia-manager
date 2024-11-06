@@ -70,7 +70,7 @@ This function converts an MP4 video file to an MP3 audio file.
 
 **Example:**
 ```python
-convert_mp4_to_mp3('my_video.mp4', 'my_audio')
+convert_mp4_to_mp3('my_video.mp4', 'my_audio.mp3')
 ```
 
 ### `transcribe_audio(input_audio, model_size="base")`
@@ -86,7 +86,7 @@ This function transcribes text from an audio file using the Whisper model.
 
 **Example:**
 ```python
-transcribe_audio('my_audio.mp3', 'large')
+transcribe_audio('my_audio.mp3', 'small')
 ```
 
 ### `cut_media(input_file, output_file, start_time, end_time)`
