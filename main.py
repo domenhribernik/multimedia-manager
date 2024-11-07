@@ -73,6 +73,9 @@ def main():
     root.geometry("800x700")
     root.config(padx=10, pady=10)
 
+    root.tk.call("source", "azure-theme/azure.tcl")
+    root.tk.call("set_theme", "dark")
+
     # Define fonts
     title_font = ("Helvetica", 14, "bold")
     label_font = ("Helvetica", 10)
@@ -80,18 +83,6 @@ def main():
     # Title
     title_label = tk.Label(root, text="Media Processing Tool", font=title_font)
     title_label.pack(pady=5)
-
-    style = ttk.Style()
-    style.configure('Custom.TButton', 
-                    foreground='#111111',  # White text color
-                    font=('Helvetica', 12, 'bold'),  # Font style
-                    borderwidth=2,         # Border width
-                    padding=(10, 5))            # Padding
-
-    style.element_create('Custom.TButton', 'from', 'clam')
-    style.layout('Custom.TButton', [('Button.button', {'children': [('Button.focus', {'children': [('Button.padding', {'children': [('Button.label', {'sticky': 'nswe'})], 'sticky': 'nswe'})], 'sticky': 'nswe'})], 'sticky': 'nswe'})])
-    style.configure('Custom.TButton', background='#333333')
-
 
     # Frame for the left-side file lists
     file_list_frame = ttk.Frame(root)
@@ -144,7 +135,7 @@ def main():
     tk.Label(download_frame, text="YouTube URL:", font=label_font).grid(row=0, column=0, padx=5, pady=2, sticky="e")
     url_entry = tk.Entry(download_frame, width=40)
     url_entry.grid(row=0, column=1, padx=5, pady=2)
-    ttk.Button(download_frame, text="Download Video", style="Custom.TButton", command=download_youtube_video_gui).grid(row=1, column=0, columnspan=2, pady=5)
+    ttk.Button(download_frame, text="Download Video", style="Accent.TButton", command=download_youtube_video_gui).grid(row=1, column=0, columnspan=2, pady=5)
     
     # Video Crop Section
     crop_frame = ttk.LabelFrame(root, text="Crop Video to Aspect Ratio", padding=(10, 5))
@@ -157,19 +148,19 @@ def main():
     tk.Label(crop_frame, text="Output File:", font=label_font).grid(row=1, column=0, padx=5, pady=2, sticky="e")
     output_file_entry = tk.Entry(crop_frame, width=30)
     output_file_entry.grid(row=1, column=1, padx=5, pady=2)
-    ttk.Button(crop_frame, text="Crop Video", style="Custom.TButton", command=crop_video_to_aspect_ratio_gui).grid(row=2, column=0, columnspan=2, pady=5)
+    ttk.Button(crop_frame, text="Crop Video", style="Accent.TButton", command=crop_video_to_aspect_ratio_gui).grid(row=2, column=0, columnspan=2, pady=5)
 
     # Convert Video to MP3 Section
     convert_frame = ttk.LabelFrame(root, text="Convert MP4 to MP3", padding=(10, 5))
     convert_frame.pack(fill="x", pady=5)
 
-    ttk.Button(convert_frame, text="Convert to MP3", style="Custom.TButton", command=convert_mp4_to_mp3_gui).grid(row=0, column=0, columnspan=2, pady=5)
+    ttk.Button(convert_frame, text="Convert to MP3", style="Accent.TButton", command=convert_mp4_to_mp3_gui).grid(row=0, column=0, columnspan=2, pady=5)
 
     # Transcribe Audio Section
     transcribe_frame = ttk.LabelFrame(root, text="Transcribe Audio", padding=(10, 5))
     transcribe_frame.pack(fill="x", pady=5)
     
-    ttk.Button(transcribe_frame, text="Transcribe Audio", style="Custom.TButton", command=transcribe_audio_gui).grid(row=0, column=0, columnspan=2, pady=5)
+    ttk.Button(transcribe_frame, text="Transcribe Audio", style="Accent.TButton", command=transcribe_audio_gui).grid(row=0, column=0, columnspan=2, pady=5)
 
     # Cut Media Section
     cut_frame = ttk.LabelFrame(root, text="Cut Media", padding=(10, 5))
@@ -182,8 +173,8 @@ def main():
     tk.Label(cut_frame, text="End Time (HH:MM:SS):", font=label_font).grid(row=1, column=0, padx=5, pady=2, sticky="e")
     end_time_entry = tk.Entry(cut_frame, width=15)
     end_time_entry.grid(row=1, column=1, padx=5, pady=2)
-    ttk.Button(cut_frame, text="Cut Media", style="Custom.TButton", command=cut_media_gui).grid(row=2, column=0, columnspan=2, pady=5)
-    ttk.Button(root, text="Initialize Project Structure", style="Custom.TButton", command=initialize_project_structure_gui).pack(pady=10)
+    ttk.Button(cut_frame, text="Cut Media", style="Accent.TButton", command=cut_media_gui).grid(row=2, column=0, columnspan=2, pady=5)
+    ttk.Button(root, text="Initialize Project Structure", style="Accent.TButton", command=initialize_project_structure_gui).pack(pady=10)
 
     root.mainloop()
 
