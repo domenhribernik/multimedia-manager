@@ -1,4 +1,6 @@
 from lib import *
+from app import App
+from testing.example import App as App2
 import os
 import tkinter as tk
 from tkinter import messagebox, ttk
@@ -179,4 +181,25 @@ def main():
     root.mainloop()
 
 if __name__ == '__main__':
-    main()
+    # main()
+    root = tk.Tk()
+    root.title("Multimedia Manager")
+    root.wm_attributes("-alpha", 0)  # Make the window transparent
+    root.update_idletasks()           # Process any pending idle tasks
+    root.wm_attributes("-alpha", 1)  # Make the window opaque again
+
+    # Simply set the theme
+    root.tk.call("source", "azure-theme/azure.tcl")
+    root.tk.call("set_theme", "dark")
+
+    app = App(root)
+    app.pack(fill="both", expand=True)
+
+    # Set a minsize for the window, and place it in the middle
+    root.update()
+    root.minsize(root.winfo_width(), root.winfo_height())
+    x_cordinate = int((root.winfo_screenwidth() / 2) - (root.winfo_width() / 2))
+    y_cordinate = int((root.winfo_screenheight() / 2) - (root.winfo_height() / 2))
+    root.geometry("+{}+{}".format(x_cordinate, y_cordinate-20))
+
+    root.mainloop()

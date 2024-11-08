@@ -1,4 +1,23 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore environment and virtualenv folders
+venv/
+env/
+
+# Ignore PyInstaller build files
+/build/
+dist/
+*.spec
+
+# Ignore IDE config files
+.vscode/
+.idea/
+
+# Ignore local files
 videos/
 audios/
-.venv/
 testing/
