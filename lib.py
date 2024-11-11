@@ -3,6 +3,7 @@ from moviepy.editor import VideoFileClip
 import subprocess
 import os
 import whisper
+from datetime import timedelta
 
 def initialize_project_structure():
     directories = ["audios", "videos"]
@@ -101,6 +102,32 @@ def transcribe_audio(input_audio, model_size="base"):
     print(result["text"])
 
     return result["text"]
+
+def generate_subtitles(song_name):
+    model = whisper.load_model('base')  # Load the Whisper model
+    result = model.transcribe(song_name, word_timestamps=True)  # Transcribe the audio file
+    segments = result["segments"]
+
+    for i, segment in enumerate(segments, start=1):
+        start_time = str(timedelta(seconds=segment['start']))
+        end_time = str(timedelta(seconds=segment['end']))
+        text = segment['text']
+        print(f"Segment {i}:")
+        print(f"  Start Time: {start_time}")
+        print(f"  End Time:   {end_time}")
+        print(f"  Text:       {text}")
+        print("-" * 40)
+
+        for word_info in segment.get('words', []):  # 'words' contains word-level timestamps
+            word_text = word_info.get('text') or word_info.get('word')  # Handle cases for 'text' or 'word'
+            word_start = str(timedelta(seconds=word_info['start'])) if 'start' in word_info else "N/A"
+            word_end = str(timedelta(seconds=word_info['end'])) if 'end' in word_info else "N/A"
+            
+            # Print word details with start and end times
+            if word_text:
+                print(f"    {word_text}: {word_start} --> {word_end}")
+
+        print("-" * 40)
 
 def cut_media(input_file, output_file, start_time, end_time):
     input_path = os.path.join("videos" if input_file.endswith(('.mp4', '.mkv')) else "audios", input_file)
