@@ -20,4 +20,4 @@ dist/
 # Ignore local files
 videos/
 audios/
-testing/
+# testing/
